@@ -16,7 +16,8 @@
     "format": "prettier --write . && npm format:svg",
     "prepare": "husky install",
     "test": "npm run test:unit && npm run test:e2e",
-    "test:unit": "vitest",
+    "test:unit": "vitest run --run",
+    "test:unit-watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e-ui": "playwright test --ui"
   },
