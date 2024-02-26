@@ -1,15 +1,22 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    container: {
+      center: true,
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+      },
+    },
     extend: {
       fontFamily: {
         nunito: ['Nunito Sans', 'sans-serif'],
         display: ['Nunito Sans', 'sans-serif'],
       },
       fontSize: {
-        xs: ['0.75rem', { lineHeight: '1rem' }], // Example for 12px size, adjust as needed
-        // Add custom sizes
-        1: '0.0625rem',
+        xs: ['0.75rem', { lineHeight: '1rem' }],
         2: '0.125rem',
         4: '0.25rem',
         8: '0.5rem',
@@ -28,8 +35,8 @@ export default {
         extrabold: '800',
       },
       colors: {
+        primary: '#7B1FA2',
         gray: {
-          0: '#FFFFFF',
           100: '#EEF0F5',
           200: '#CDD1D9',
           400: '#A8ADB7',
@@ -49,7 +56,6 @@ export default {
         teal: {
           400: '#00A296',
         },
-        transparent: 'transparent',
       },
     },
   },
