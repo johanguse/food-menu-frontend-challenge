@@ -12,16 +12,14 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   maxFailures: process.env.CI ? 10 : undefined,
 
-  webServer: process.env.CI
-    ? undefined
-    : {
-        command: 'bun run dev',
-        reuseExistingServer: false,
-        url:
-          process.env.PLAYWRIGHT_TEST_BASE_URL ||
-          baseURL ||
-          'http://localhost:5173',
-      },
+  webServer: {
+    command: 'npm run dev',
+    reuseExistingServer: !process.env.CI,
+    url:
+      process.env.PLAYWRIGHT_TEST_BASE_URL ||
+      baseURL ||
+      'http://localhost:5173',
+  },
 
   use: {
     ignoreHTTPSErrors: true,
