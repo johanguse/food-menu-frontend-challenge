@@ -24,4 +24,5 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   test: vitestConfig.test,
+  base: '/food-menu-frontend-challenge/',
 });
