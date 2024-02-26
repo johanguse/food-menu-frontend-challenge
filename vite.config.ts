@@ -8,11 +8,9 @@ const vitestConfig: VitestUserConfigInterface = {
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/tests/setup.ts',
+    setupFiles: './src/__tests__/setup.ts',
   },
 };
-
-// https://vitejs.dev/config/
 
 export default defineConfig({
   plugins: [
