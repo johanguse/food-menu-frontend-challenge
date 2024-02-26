@@ -15,8 +15,8 @@ export default defineConfig({
   webServer: process.env.CI
     ? undefined
     : {
-        command: 'bun run dev',
-        reuseExistingServer: false,
+        command: 'npm run dev',
+        reuseExistingServer: !process.env.CI,
         url:
           process.env.PLAYWRIGHT_TEST_BASE_URL ||
           baseURL ||
