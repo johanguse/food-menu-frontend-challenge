@@ -6,7 +6,7 @@ import Radio from '@components/inputs/radio';
 import Textarea from '@components/inputs/textarea';
 import Footer from '@components/layout/footer';
 import Header from '@components/layout/header';
-import Tag from '@components/ui/tag/tag';
+import Tag from '@components/ui/tag';
 
 export const App = () => {
   const [selectedRadio, setSelectedRadio] = useState('');

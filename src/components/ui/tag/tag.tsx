@@ -2,7 +2,7 @@ import { tagStyles } from './tag-styles';
 
 export type TagProps = {
   text: string;
-  tagVariant?: 'primary' | 'secondary';
+  tagVariant?: 'primary';
 };
 
 export default function Tag({ text }: TagProps) {
