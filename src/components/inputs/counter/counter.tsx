@@ -1,8 +1,8 @@
 import React from 'react';
 
 import TrashIcon from '@assets/icons/trash.svg';
-import MinusButtonComponent from '@components/minus-button';
-import PlusButtonComponent from '@components/plus-button';
+import MinusButtonComponent from '@components/inputs/minus-button';
+import PlusButtonComponent from '@components/inputs/plus-button';
 
 interface CounterComponentProps {
   counter: number;
@@ -23,7 +23,7 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
   const iconSizeClass = size === 'small' ? 'w-6 h-6' : 'w-8 h-8';
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-3">
       {showTrashIcon && counter === 1 ? (
         <button
           onClick={decreaseFunction}

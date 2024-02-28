@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="flex w-full flex-col items-center gap-2 bg-gray-100 py-8">
+    <footer className="flex w-full flex-col items-center gap-2 bg-gray-100 px-5 py-8">
       <span className="text-sm font-bold text-purple-700">
         feito com 💜 em maringá-PR
       </span>

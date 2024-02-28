@@ -1,6 +1,6 @@
 import { forwardRef, useMemo } from 'react';
 
-import { solidButton } from './buttonstyles';
+import { solidButtonStyles } from './button-styles';
 import LoaderSpinner from '@assets/icons/loader_spinner.svg?react';
 import { type VariantProps } from 'tailwind-variants';
 
@@ -13,7 +13,7 @@ interface ButtonProps extends BaseButtonAttributes {
   disabled?: boolean;
   leftIcon?: React.ReactElement;
   rightIcon?: React.ReactElement;
-  buttonStyle?: VariantProps<typeof solidButton>;
+  buttonStyle?: VariantProps<typeof solidButtonStyles>;
   className?: string;
   buttonVariant?: 'primary' | 'secondary';
 }
@@ -49,9 +49,9 @@ const Button = forwardRef<Ref, ButtonProps>((props, ref) => {
 
   const renderButtonVariant = () => {
     if (buttonVariant === 'primary') {
-      return solidButton({ ...buttonStyle, className });
+      return solidButtonStyles({ ...buttonStyle, className });
     }
-    return solidButton({ ...buttonStyle, className });
+    return solidButtonStyles({ ...buttonStyle, className });
   };
 
   return (
