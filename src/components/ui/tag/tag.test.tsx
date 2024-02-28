@@ -11,6 +11,7 @@ describe('Tag Component', () => {
   });
 
   it('does not render without text', () => {
+    /* @ts-expect-error Test tag without text props  */
     const { container } = render(<Tag />);
     expect(container).toBeEmptyDOMElement();
   });
