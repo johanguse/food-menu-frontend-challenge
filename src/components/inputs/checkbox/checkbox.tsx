@@ -4,14 +4,14 @@ import CheckboxInactive from '@assets/icons/checkbox_disabled.svg?react';
 interface CustomCheckboxProps {
   value: string;
   label?: string;
-  checked: boolean;
+  isChecked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Checkbox({
   value,
   label,
-  checked,
+  isChecked,
   onChange,
 }: CustomCheckboxProps) {
   return (
@@ -24,15 +24,23 @@ export default function Checkbox({
         id={value}
         name={value}
         value={value}
-        checked={checked}
+        checked={isChecked}
         onChange={onChange}
       />
-      {checked ? (
+      {isChecked ? (
         <CheckboxActive className="size-6" />
       ) : (
         <CheckboxInactive className="size-6" />
       )}
-      {label && <span className="ml-2 text-sm text-gray-700">{label}</span>}
+      {label && (
+        <span
+          className={
+            `ml-2 text-sm text-gray-700` +
+            (isChecked ? ' font-bold' : ' font-normal')
+          }>
+          {label}
+        </span>
+      )}
     </label>
   );
 }

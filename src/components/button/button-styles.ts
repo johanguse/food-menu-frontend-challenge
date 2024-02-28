@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-export const solidButton = tv({
+export const solidButtonStyles = tv({
   base: 'text-center relative whitespace-nowrap align-middle inline-flex items-center justify-center select-none rounded-lg py-2 px-6',
   variants: {
     variant: {
@@ -9,5 +9,8 @@ export const solidButton = tv({
       secondary:
         'bg-purple-100 text-primary font-bold shadow-purple active:shadow-none focus:shadow-purple',
     },
+  },
+  defaultVariants: {
+    variant: 'primary',
   },
 });

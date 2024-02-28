@@ -10,7 +10,7 @@ export default function Header() {
   const address = 'Rua Mandaguari, 198';
 
   return (
-    <header id="header" className="w-full bg-primary py-5">
+    <header id="header" className="fixed z-20 w-full bg-primary px-4 py-5">
       <div className="container mx-auto grid grid-cols-3 items-center">
         <div className="flex items-center gap-12">
           <img src={CompanyLogo} alt="Company Logo" width={73} height={40} />
