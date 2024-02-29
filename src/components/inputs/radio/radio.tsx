@@ -57,7 +57,7 @@ const Radio: React.FC<RadioProps> = ({
         )}
       </label>
 
-      {price && price >= 0 && (
+      {price > 0 && (
         <span className="text-14 text-primary">
           {formatNumberToCurrency(price)}
         </span>

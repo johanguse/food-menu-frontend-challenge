@@ -18,12 +18,14 @@
           {
             "name": "médio",
             "dish": "Ceviche de salmão",
+            "size": "médio",
             "price": 22.9,
             "discountPrice": 19.9
           },
           {
             "name": "grande",
             "dish": "Ceviche de salmão",
+            "size": "grande",
             "price": 28.9
           }
         ]
@@ -59,7 +61,8 @@
         "isAddition": true,
         "options": [
           {
-            "name": "hashi"
+            "name": "hashi",
+            "price": 0.0
           },
           {
             "name": "garfo e faca descartável",

@@ -26,31 +26,42 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
   const { currentTicket, updateSelection } = useTicketStore();
   const counter =
     currentTicket?.selections[sectionName]?.[optionName]?.quantity || 0;
+  const itemPrice =
+    currentTicket?.selections[sectionName]?.[optionName]?.price || 0;
 
   const increaseFunction = () => {
-    updateSelection(
-      'COUNTER',
-      sectionName,
-      optionName,
-      counter + 1,
-      price || 0
-    );
+    updateSelection('COUNTER', sectionName, optionName, counter + 1, price);
   };
 
   const decreaseFunction = () => {
     if (counter > 0) {
-      updateSelection(
-        'COUNTER',
-        sectionName,
-        optionName,
-        counter - 1,
-        price || 0
-      );
+      updateSelection('COUNTER', sectionName, optionName, counter - 1, price);
     }
   };
 
   const textSizeClass = size === 'small' ? 'text-md' : 'text-lg';
   const iconSizeClass = size === 'small' ? 'w-6 h-6' : 'w-8 h-8';
+
+  const getFormattedPrice = () => {
+    let calculatedPrice;
+
+    switch (counter) {
+      case 0:
+        calculatedPrice = price;
+        break;
+      case 1:
+        calculatedPrice = price * 2;
+        break;
+      case 2:
+        calculatedPrice = price + itemPrice * 2;
+        break;
+      default:
+        calculatedPrice = price * (counter + 1);
+        break;
+    }
+
+    return formatNumberToCurrency(calculatedPrice);
+  };
 
   return (
     <div className="flex flex-row items-center justify-between gap-2">
@@ -73,9 +84,7 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
       </div>
       {label && <span className="text-14">{label}</span>}
       {price !== undefined && label && (
-        <span className="text-primary">
-          + {formatNumberToCurrency(price * counter)}
-        </span>
+        <span className="text-primary">+ {getFormattedPrice()}</span>
       )}
     </div>
   );

@@ -6,22 +6,31 @@ import { useTicketStore } from '@stores/ticket';
 import { formatNumberToCurrency } from 'src/lib/utils';
 
 export default function HeaderItem() {
-  const { addItem, currentTicket } = useTicketStore((state) => ({
-    addItem: state.addItem,
-    currentTicket: state.currentTicket,
-    total: state.currentTicket?.total || 0,
-  }));
+  const { addItem, currentItem, currentTicket, total } = useTicketStore(
+    (state) => ({
+      addItem: state.addItem,
+      currentItem: state.currentItem,
+      currentTicket: state.currentTicket,
+      total: state.currentTicket?.total || 0,
+    })
+  );
 
   const handleAddItem = () => {
-    console.log('handleAddItem');
-    addItem(
-      mockDataDish.item.sections[0].name,
-      mockDataDish.item.sections[0].options[0].name,
-      mockDataDish.item.initialPrice,
-      1
-    );
+    if (
+      currentItem &&
+      currentItem.sections.length > 0 &&
+      currentItem.sections[0].options.length > 0
+    ) {
+      const firstSection = currentItem.sections[0];
+      const firstOption = firstSection.options[0];
+      addItem(
+        firstSection.name,
+        firstOption.name,
+        firstOption.price || currentItem.initialPrice,
+        1
+      );
+    }
   };
-  const total = useTicketStore((state) => state.currentTicket?.total || 0);
 
   return (
     <div className="w-full bg-white pt-20">
@@ -85,8 +94,8 @@ export default function HeaderItem() {
                   </Button>
                 ) : (
                   <CounterComponent
-                    sectionName={mockDataDish.item.sections[0].name}
-                    optionName={mockDataDish.item.name}
+                    sectionName={currentItem?.sections[0].name}
+                    optionName={currentItem?.sections[0].name}
                     price={mockDataDish.item.initialPrice}
                     size="large"
                     showTrashIcon
