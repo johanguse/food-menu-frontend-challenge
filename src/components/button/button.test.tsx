@@ -1,6 +1,5 @@
 import Button from './button';
 import LoaderSpinner from '@assets/icons/loader_spinner.svg?react';
-// Adjust import path as necessary
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';

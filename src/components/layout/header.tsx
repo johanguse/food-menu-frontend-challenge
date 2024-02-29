@@ -5,8 +5,10 @@ import SearchIcon from '@assets/icons/search.svg';
 import TicketIcon from '@assets/icons/ticket.svg?react';
 import UserIcon from '@assets/icons/user.svg?react';
 import Button from '@components/button';
+import { useTicketStore } from '@stores/ticket';
 
 export default function Header() {
+  const { currentTicket } = useTicketStore();
   const address = 'Rua Mandaguari, 198';
 
   return (
@@ -44,11 +46,18 @@ export default function Header() {
         </div>
 
         <div className="flex items-center justify-end gap-4">
-          <Button
-            buttonStyle={{ variant: 'secondary' }}
-            leftIcon={<TicketIcon className="size-6" />}>
-            ver ticket
-          </Button>
+          {!(
+            !currentTicket ||
+            Object.keys(currentTicket?.selections ?? {}).length === 0 ||
+            currentTicket?.total === 0
+          ) && (
+            <Button
+              buttonStyle={{ variant: 'secondary' }}
+              leftIcon={<TicketIcon className="size-6" />}>
+              ver ticket
+            </Button>
+          )}
+
           <Button
             buttonStyle={{ variant: 'primary' }}
             leftIcon={<UserIcon className="size-6" />}>

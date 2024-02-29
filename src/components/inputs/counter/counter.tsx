@@ -3,42 +3,80 @@ import React from 'react';
 import TrashIcon from '@assets/icons/trash.svg';
 import MinusButtonComponent from '@components/inputs/minus-button';
 import PlusButtonComponent from '@components/inputs/plus-button';
+import { useTicketStore } from '@stores/ticket';
+import { formatNumberToCurrency } from 'src/lib/utils';
 
 interface CounterComponentProps {
-  counter: number;
-  showTrashIcon?: boolean;
-  size?: 'small' | 'large';
-  increaseFunction: () => void;
-  decreaseFunction: () => void;
+  sectionName: string;
+  optionName: string;
+  showTrashIcon: boolean;
+  size: 'small' | 'large';
+  label?: string;
+  price: number;
 }
 
 const CounterComponent: React.FC<CounterComponentProps> = ({
-  counter = 0,
-  decreaseFunction,
-  increaseFunction,
+  sectionName,
+  optionName,
   showTrashIcon = false,
   size = 'small',
+  label,
+  price,
 }) => {
+  const { currentTicket, updateSelection } = useTicketStore();
+  const counter =
+    currentTicket?.selections[sectionName]?.[optionName]?.quantity || 0;
+
+  const increaseFunction = () => {
+    updateSelection(
+      'COUNTER',
+      sectionName,
+      optionName,
+      counter + 1,
+      price || 0
+    );
+  };
+
+  const decreaseFunction = () => {
+    if (counter > 0) {
+      updateSelection(
+        'COUNTER',
+        sectionName,
+        optionName,
+        counter - 1,
+        price || 0
+      );
+    }
+  };
+
   const textSizeClass = size === 'small' ? 'text-md' : 'text-lg';
   const iconSizeClass = size === 'small' ? 'w-6 h-6' : 'w-8 h-8';
 
   return (
-    <div className="flex items-center gap-3">
-      {showTrashIcon && counter === 1 ? (
-        <button
-          onClick={decreaseFunction}
-          className="m-0 flex cursor-pointer border-none bg-transparent p-0">
-          <img src={TrashIcon} alt="trash icon" className={iconSizeClass} />
-        </button>
-      ) : (
-        <MinusButtonComponent
-          disabled={counter === 0}
-          decreaseFunction={decreaseFunction}
-          size={size}
-        />
+    <div className="flex flex-row items-center justify-between gap-2">
+      <div className="flex items-center gap-3">
+        {showTrashIcon || (counter === 1 && !label) ? (
+          <button
+            onClick={decreaseFunction}
+            className="flex cursor-pointer border-none bg-transparent p-0">
+            <img src={TrashIcon} alt="trash icon" className={iconSizeClass} />
+          </button>
+        ) : (
+          <MinusButtonComponent
+            disabled={counter === 0}
+            decreaseFunction={decreaseFunction}
+            size={size}
+          />
+        )}
+        <span className={`${textSizeClass} font-bold`}>{counter}</span>
+        <PlusButtonComponent increaseFunction={increaseFunction} size={size} />
+      </div>
+      {label && <span className="text-14">{label}</span>}
+      {price !== undefined && label && (
+        <span className="text-primary">
+          + {formatNumberToCurrency(price * counter)}
+        </span>
       )}
-      <span className={`${textSizeClass} font-bold`}>{counter}</span>
-      <PlusButtonComponent increaseFunction={increaseFunction} size={size} />
     </div>
   );
 };
