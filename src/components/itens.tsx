@@ -34,7 +34,7 @@ const TicketItems = () => {
       <p>Name: {currentTicket.name}</p>
       <p>Initial Price: {formatNumberToCurrency(currentTicket.initialPrice)}</p>
       <p>Quantity: {currentTicket.quantity}</p>
-      <p>Observation: {currentTicket.observation}</p>
+      <p>Observation: {currentTicket.observationText}</p>
       <p>Total: {formatNumberToCurrency(currentTicket.total)}</p>
     </div>
   );
