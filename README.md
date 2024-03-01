@@ -67,7 +67,7 @@ bun run dev  # You can also use npm, yarn or pnpm if you prefer
 
 This command fires up the Next.js development server.
 
-**Accessing the Server**: By default, the server will be accessible at [http://localhost:5173](http://localhost:5173). You can use this URL to view your application in a web browser.
+**Accessing the Server**: By default, the server will be accessible at [http://localhost:5173/food-menu-frontend-challenge](http://localhost:5173/food-menu-frontend-challenge). You can use this URL to view your application in a web browser.
 
 Note: The default port (5173) can be modified in the project settings if necessary.
 
@@ -106,6 +106,12 @@ We use ESLint and Prettier to ensure code quality and consistency. You can run t
 ```bash
 bun run lint  # You can also use npm, yarn or pnpm if you prefer
 ```
+
+### Things could be improve with extra time
+
+- Responsive layout
+- Add more images formats, webp, avif
+- Add Storybook
 
 ## 📝 License
 

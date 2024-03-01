@@ -2,7 +2,7 @@ export const data = {
   item: {
     name: 'Ceviche de salmão',
     description: 'salmão temperado com limão, cebola e pimenta',
-    initialPrice: 20.0,
+    initialPrice: 19.9,
     image:
       'https://res.cloudinary.com/dvcywi3uf/image/upload/v1708968385/outros/fe-tests/food/main_dish_ceviche.jpg',
     imageAlt:
@@ -23,14 +23,14 @@ export const data = {
             name: 'médio',
             dish: 'Ceviche de salmão',
             size: 'médio',
-            price: 25.0,
-            discountPrice: 20.0,
+            price: 22.9,
+            discountPrice: 19.9,
           },
           {
             name: 'grande',
             dish: 'Ceviche de salmão',
             size: 'grande',
-            price: 30.0,
+            price: 28.9,
           },
         ],
       },

@@ -9,7 +9,7 @@ export default function Textarea() {
   };
 
   return (
-    <div className="flex w-full border-t-4 border-gray-300 px-12 py-14">
+    <div className="flex w-full border-t-4 border-gray-300 px-12 pb-10 pt-5">
       <textarea
         name="observacao"
         id="observacao"

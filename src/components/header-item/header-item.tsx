@@ -11,9 +11,9 @@ export default function HeaderItem() {
   }));
 
   return (
-    <div className="w-full bg-white pt-20">
+    <div className="mx-4 bg-white pt-20">
       <div className="container mx-auto">
-        <div className="item-header py-6">
+        <div className="item-header py-7">
           <div className="mb-6 flex flex-row items-center gap-2 px-0">
             <img
               src={mockDataRestaurant.company.logo}
@@ -32,7 +32,7 @@ export default function HeaderItem() {
                 <h2 className="text-24 font-bold text-gray-700">
                   {currentTicket?.name}
                 </h2>
-                <div className="flex flex-row items-center gap-2">
+                <div className="mb-2 flex flex-row items-center gap-2">
                   <span className="text-16 font-bold text-gray-500">
                     a partir de
                   </span>
@@ -40,13 +40,13 @@ export default function HeaderItem() {
                     {formatNumberToCurrency(currentTicket?.initialPrice)}
                   </span>
                 </div>
-                <p className="text-16 font-semibold text-gray-500">
+                <p className="text-16 font-normal text-gray-500">
                   {mockDataDish.item.description}
                 </p>
               </div>
               <div className="flex w-80 flex-row items-start justify-between">
                 <div className="flex flex-col">
-                  <span className="text-16 font-bold text-gray-700">
+                  <span className="mb-1 text-16 font-semibold text-gray-700">
                     quantos?
                   </span>
                   {!(
@@ -55,8 +55,8 @@ export default function HeaderItem() {
                     currentTicket?.total === 0
                   ) && (
                     <p className="flex flex-row items-center gap-1 text-14">
-                      total:
-                      <span className="font-extrabold">
+                      <span className="text-gray-500">total:</span>
+                      <span className="font-bold">
                         {formatNumberToCurrency(total)}
                       </span>
                     </p>

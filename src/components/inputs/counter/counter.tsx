@@ -54,8 +54,8 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
     );
   };
 
-  const textSizeClass = size === 'small' ? 'text-md' : 'text-lg';
-  const iconSizeClass = size === 'small' ? 'w-6 h-6' : 'w-8 h-8';
+  const textSizeClass = size === 'small' ? 'text-14' : 'text-16';
+  const iconSizeClass = size === 'small' ? 'size-6' : 'size-8';
 
   const getFormattedPrice = () => {
     let calculatedPrice;
@@ -80,11 +80,9 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
 
   return (
     <div className="flex flex-row items-center justify-between gap-2">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-5">
         {(!label && counter === 1) || (!showTrashIcon && !label) ? (
-          <button
-            onClick={decreaseFunction}
-            className="flex cursor-pointer border-none bg-transparent p-0">
+          <button onClick={decreaseFunction} className="flex cursor-pointer">
             <img src={TrashIcon} alt="trash icon" className={iconSizeClass} />
           </button>
         ) : (
@@ -96,10 +94,11 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
         )}
         <span className={`${textSizeClass} font-bold`}>{counter}</span>
         <PlusButtonComponent increaseFunction={increaseFunction} size={size} />
+        {label && <span className="text-14 text-gray-500">{label}</span>}
       </div>
-      {label && <span className="text-14">{label}</span>}
+
       {price !== undefined && label && (
-        <span className="text-primary">
+        <span className="text-14 font-bold text-primary">
           {isAddition ? '+' : ''} {getFormattedPrice()}
         </span>
       )}

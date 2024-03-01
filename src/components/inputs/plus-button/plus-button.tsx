@@ -17,7 +17,7 @@ const PlusButtonComponent: React.FC<PlusButtonComponentProps> = ({
   const iconSrc = disabled ? plusDisabled : plusActive;
   const altText = 'plus icon';
 
-  const sizeClasses = size === 'small' ? 'w-8 h-8' : 'w-12 h-12';
+  const sizeClasses = size === 'small' ? 'size-7' : 'size-9';
 
   return (
     <button

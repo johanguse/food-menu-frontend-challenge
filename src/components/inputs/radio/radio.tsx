@@ -49,7 +49,7 @@ const Radio: React.FC<RadioProps> = ({
           <span
             id={`${name}-label`}
             className={
-              `ml-2 flex flex-row items-center text-sm text-gray-700` +
+              `ml-2 flex flex-row items-center text-sm text-gray-500` +
               (isChecked ? ' font-bold' : ' font-normal')
             }>
             {isDiscountPrice ? <Cifra className="-ml-2 mr-2 size-5" /> : null}
@@ -59,12 +59,14 @@ const Radio: React.FC<RadioProps> = ({
       </label>
 
       {price >= 0 && !isDiscountPrice ? (
-        <span className="text-14 text-primary">
+        <span className="text-14 font-bold text-primary">
           {formatNumberToCurrency(isDiscountPrice ? discountPrice : price)}
         </span>
       ) : (
-        <div className="text-12">
-          <span>de {formatNumberToCurrency(price)} por </span>
+        <div className="text-12 font-bold">
+          <span className="mr-1 text-gray-500">
+            de {formatNumberToCurrency(price)} por{' '}
+          </span>
           <span className="text-14 text-green-500">
             {formatNumberToCurrency(discountPrice)}
           </span>

@@ -121,12 +121,14 @@ export default function FieldsetComponent({
   };
 
   return (
-    <fieldset className="item-choose border-t-4 border-gray-300 px-5 py-14">
+    <fieldset className="item-choose border-t-4 border-gray-300 px-5 py-6">
       <div className="container px-12">
         <div className="flex flex-row items-center justify-between gap-2 px-0">
           <div className="mb-6 flex flex-col">
             <legend className="text-16 font-bold">{legend}</legend>
-            <small className="text-12">{description}</small>
+            <small className="text-12 font-semibold text-gray-500">
+              {description}
+            </small>
           </div>
           {required && <Tag text="obrigatório" />}
         </div>
