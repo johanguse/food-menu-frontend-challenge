@@ -1,5 +1,3 @@
-import React from 'react';
-
 import plusActive from '@assets/icons/plus_active.svg';
 import plusDisabled from '@assets/icons/plus_disabled.svg';
 

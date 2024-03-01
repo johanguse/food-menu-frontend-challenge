@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Cifra from '@assets/icons/cifra.svg?react';
 import RadioActive from '@assets/icons/radio_active.svg?react';
 import RadioInactive from '@assets/icons/radio_disabled.svg?react';
@@ -16,7 +14,7 @@ interface RadioProps {
   isAddition?: boolean;
 }
 
-const Radio: React.FC<RadioProps> = ({
+export default function Radio({
   name,
   label,
   price,
@@ -24,8 +22,7 @@ const Radio: React.FC<RadioProps> = ({
   onChange,
   value,
   discountPrice,
-  isAddition,
-}) => {
+}: RadioProps) {
   const isDiscountPrice = discountPrice ? true : false;
   return (
     <div className="flex flex-row items-center justify-between gap-2">
@@ -82,6 +79,4 @@ const Radio: React.FC<RadioProps> = ({
       )}
     </div>
   );
-};
-
-export default Radio;
+}

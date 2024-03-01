@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Radio from '@components/inputs/radio';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';

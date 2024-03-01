@@ -1,5 +1,3 @@
-import React from 'react';
-
 import TrashIcon from '@assets/icons/trash.svg';
 import MinusButtonComponent from '@components/inputs/minus-button';
 import PlusButtonComponent from '@components/inputs/plus-button';
@@ -17,16 +15,16 @@ interface CounterComponentProps {
   isAddition?: boolean;
 }
 
-const CounterComponent: React.FC<CounterComponentProps> = ({
+export default function Counter({
   sectionName,
   optionName,
-  showTrashIcon = false,
-  size = 'small',
+  showTrashIcon,
+  size,
   label,
   price,
   discountPrice,
   isAddition,
-}) => {
+}: CounterComponentProps) {
   const { currentTicket, updateSelection } = useTicketStore();
   const counter =
     currentTicket?.selections[sectionName]?.[optionName]?.quantity || 0;
@@ -106,6 +104,4 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
       )}
     </div>
   );
-};
-
-export default CounterComponent;
+}
