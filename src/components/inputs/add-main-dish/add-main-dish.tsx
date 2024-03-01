@@ -28,10 +28,23 @@ export default function AddMainDish() {
   }
 
   const handleAddItem = () => {
-    // Assuming the first section and first option are the main dish
-    // This should handle in a better way
-    const firstSection = currentItem?.sections[0];
-    const firstOption = firstSection?.options[0];
+    if (!currentItem || currentItem.sections.length === 0) {
+      console.warn('No sections available');
+      return;
+    }
+
+    const firstSection = currentItem.sections[0];
+    if (!firstSection || firstSection.options.length === 0) {
+      console.warn('No options available in the first section');
+      return;
+    }
+
+    const firstOption = firstSection.options[0];
+    if (!firstOption) {
+      console.warn('First option is undefined');
+      return;
+    }
+
     addMainItem(firstSection.name, firstOption.name, firstOption.price || 0, 1);
   };
 
