@@ -1,5 +1,3 @@
-import React from 'react';
-
 import minusActive from '@assets/icons/minus_active.svg';
 import minusDisabled from '@assets/icons/minus_disabled.svg';
 
@@ -9,11 +7,11 @@ interface MinusButtonComponentProps {
   size?: 'small' | 'large';
 }
 
-const MinusButtonComponent: React.FC<MinusButtonComponentProps> = ({
+export default function MinusButtonComponent({
   disabled = false,
   decreaseFunction,
   size = 'small',
-}) => {
+}: MinusButtonComponentProps) {
   const iconSrc = disabled ? minusDisabled : minusActive;
   const altText = 'minus icon';
 
@@ -28,6 +26,4 @@ const MinusButtonComponent: React.FC<MinusButtonComponentProps> = ({
       <img src={iconSrc} alt={altText} className="object-contain" />
     </button>
   );
-};
-
-export default MinusButtonComponent;
+}
