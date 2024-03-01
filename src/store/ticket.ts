@@ -153,50 +153,28 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
 
   updateMainItemQuantity: (sectionName, optionName, newQuantity) =>
     set((state) => {
-      if (!state.currentTicket || !state.currentItem) return {};
+      if (!state.currentTicket) return {};
 
       const selections = { ...state.currentTicket.selections };
-      const currentSection = state.currentItem.sections.find(
-        (section) => section.name === sectionName
-      );
-      const itemPrice =
-        currentSection?.options.find((option) => option.name === optionName)
-          ?.price || 0;
-
-      if (selections[sectionName] && !selections[sectionName][optionName]) {
+      if (!selections[sectionName]) {
         selections[sectionName] = {};
       }
 
-      if (newQuantity > 0) {
+      if (newQuantity <= 0) {
+        delete selections[sectionName][optionName];
+      } else {
         selections[sectionName][optionName] = {
-          price: itemPrice,
+          ...selections[sectionName][optionName],
           quantity: newQuantity,
         };
-      } else {
-        delete selections[sectionName][optionName];
-        if (Object.keys(selections[sectionName]).length === 0) {
-          delete selections[sectionName];
-        }
       }
-
-      console.log(selections[sectionName]);
-
-      const newTotal = calculateTotalPrice(selections);
-
-      const newQuantityTotal = Object.values(selections).reduce(
-        (acc, section) =>
-          acc +
-          Object.values(section).reduce((acc, item) => acc + item.quantity, 0),
-        0
-      );
 
       return {
         ...state,
         currentTicket: {
           ...state.currentTicket,
           selections,
-          total: newTotal,
-          quantity: newQuantityTotal,
+          total: calculateTotalPrice(selections),
         },
       };
     }),
