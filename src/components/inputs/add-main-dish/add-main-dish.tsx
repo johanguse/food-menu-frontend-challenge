@@ -8,7 +8,6 @@ export default function AddMainDish() {
   const { updateMainItemQuantity, addMainItem, currentItem, currentTicket } =
     useTicketStore();
 
-  // Assume the first section is the main dish section
   const mainDishSectionName = Object.keys(currentTicket.selections)[0] || '';
   const mainDishOptionName =
     Object.keys(currentTicket.selections[mainDishSectionName] || {})[0] || '';

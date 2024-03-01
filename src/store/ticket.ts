@@ -117,13 +117,10 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
     set((state) => {
       const newSelections = { ...state.currentTicket?.selections };
 
-      // Check if a main dish is already selected and if it's different from the current selection
       const existingMainDish = newSelections[sectionName];
       if (existingMainDish && !existingMainDish[optionName]) {
-        // If a different main dish is selected, replace the existing one
         newSelections[sectionName] = { [optionName]: { price, quantity } };
       } else {
-        // If the same main dish is selected, or if no main dish is selected, add or update the quantity
         const currentQuantity = existingMainDish?.[optionName]?.quantity || 0;
         newSelections[sectionName] = {
           ...(newSelections[sectionName] || {}),
@@ -139,7 +136,6 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
           ...state.currentTicket,
           selections: newSelections,
           total: newTotal,
-          // Update the total quantity of items in the ticket
           quantity: Object.values(newSelections).reduce(
             (acc, section) =>
               acc +
@@ -165,21 +161,17 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
         currentSection?.options.find((option) => option.name === optionName)
           ?.price || 0;
 
-      // If the section exists but the option is different, reset the section
       if (selections[sectionName] && !selections[sectionName][optionName]) {
         selections[sectionName] = {};
       }
 
       if (newQuantity > 0) {
-        // Update or set the new item quantity and price
         selections[sectionName][optionName] = {
           price: itemPrice,
           quantity: newQuantity,
         };
       } else {
-        // Remove the item if the quantity is zero or less
         delete selections[sectionName][optionName];
-        // If the section is empty after deletion, remove the section as well
         if (Object.keys(selections[sectionName]).length === 0) {
           delete selections[sectionName];
         }
@@ -187,10 +179,8 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
 
       console.log(selections[sectionName]);
 
-      // Calculate the new total price
       const newTotal = calculateTotalPrice(selections);
 
-      // Calculate the new total quantity
       const newQuantityTotal = Object.values(selections).reduce(
         (acc, section) =>
           acc +
@@ -240,20 +230,17 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
           break;
         case 'COUNTER':
           if (value > 0) {
-            // If the counter value is greater than 0, update or create the option
             selections[sectionName] = {
               ...selections[sectionName],
               [optionName]: { price, quantity: value },
             };
           } else {
-            // If the counter value is 0 or less, delete the option if it exists
             if (
               selections[sectionName] &&
               selections[sectionName][optionName]
             ) {
               delete selections[sectionName][optionName];
 
-              // If the section becomes empty after deletion, delete the section as well
               if (Object.keys(selections[sectionName]).length === 0) {
                 delete selections[sectionName];
               }
