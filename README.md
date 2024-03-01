@@ -4,6 +4,13 @@
 
 Welcome to the Food Tech frontend challenge! Dive into the realm where culinary meets code. The task? Build a menu builder for the digital age, tailored for a renowned food delivery company in Brazil.
 
+### Things could be improve with extra time
+
+- Responsive layout
+- Add more unit and e2e test
+- Add more images formats, webp, avif
+- Add Storybook
+
 To set up and run the project on your local machine, follow the instructions provided below.
 
 ## 🤖 Tech stack
@@ -106,12 +113,6 @@ We use ESLint and Prettier to ensure code quality and consistency. You can run t
 ```bash
 bun run lint  # You can also use npm, yarn or pnpm if you prefer
 ```
-
-### Things could be improve with extra time
-
-- Responsive layout
-- Add more images formats, webp, avif
-- Add Storybook
 
 ## 📝 License
 

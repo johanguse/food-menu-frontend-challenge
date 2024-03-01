@@ -32,9 +32,12 @@ export default function Checkbox({
           onChange={onChange}
         />
         {isChecked ? (
-          <CheckboxActive className="size-6" />
+          <CheckboxActive className="size-6" data-testid="checkbox-active" />
         ) : (
-          <CheckboxInactive className="size-6" />
+          <CheckboxInactive
+            className="size-6"
+            data-testid="checkbox-inactive"
+          />
         )}
         {label && (
           <span
