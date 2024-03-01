@@ -11,6 +11,7 @@ interface RadioProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   discountPrice?: number;
+  isAddition?: boolean;
 }
 
 export default function Radio({
@@ -21,6 +22,7 @@ export default function Radio({
   onChange,
   value,
   discountPrice,
+  isAddition,
 }: RadioProps) {
   const isDiscountPrice = discountPrice ? true : false;
   return (
@@ -63,6 +65,7 @@ export default function Radio({
 
       {price >= 0 && !isDiscountPrice ? (
         <span className="text-14 font-semibold text-primary">
+          {isAddition && price > 0 ? '+' : ''}{' '}
           {formatNumberToCurrency(isDiscountPrice ? discountPrice : price)}
         </span>
       ) : (

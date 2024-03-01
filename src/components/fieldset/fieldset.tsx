@@ -20,6 +20,7 @@ interface FieldsetComponentProps {
   required?: boolean;
   type: 'RADIO' | 'CHECKBOX' | 'COUNTER';
   options: Option[];
+  isAddition?: boolean;
 }
 
 export default function FieldsetComponent({
@@ -28,6 +29,7 @@ export default function FieldsetComponent({
   required,
   type,
   options,
+  isAddition,
 }: FieldsetComponentProps) {
   const { currentTicket, updateSelection } = useTicketStore();
 
@@ -70,6 +72,7 @@ export default function FieldsetComponent({
               }
               price={option.price}
               discountPrice={option.discountPrice}
+              isAddition={isAddition}
             />
           );
         });
@@ -98,6 +101,7 @@ export default function FieldsetComponent({
                 )
               }
               price={option.price}
+              isAddition={isAddition}
             />
           );
         });
@@ -112,7 +116,7 @@ export default function FieldsetComponent({
             label={option.label}
             price={option.price}
             discountPrice={option.discountPrice}
-            isAddition={option.isAddition}
+            isAddition={isAddition}
           />
         ));
       default:

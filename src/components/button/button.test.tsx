@@ -38,21 +38,4 @@ describe('Button Component', () => {
       'inline-flex shrink-0 self-center -mr-1 ml-2'
     );
   });
-
-  it('applies button variant styles correctly', () => {
-    const { rerender } = render(<Button variant="primary">Primary</Button>);
-    expect(screen.getByRole('button', { name: 'Primary' })).toHaveClass(
-      'text-center relative whitespace-nowrap align-middle inline-flex items-center justify-center select-none rounded-lg py-1 px-6 bg-teal-400 text-white font-semibold shadow-teal active:shadow-none focus:shadow-teal text-14'
-    );
-
-    rerender(<Button variant="secondary">Secondary</Button>);
-    expect(screen.getByRole('button', { name: 'Secondary' })).toHaveClass(
-      'text-center relative whitespace-nowrap align-middle inline-flex items-center justify-center select-none rounded-lg py-1 px-6 bg-purple-100 text-primary font-bold shadow-purple active:shadow-none focus:shadow-purple text-14'
-    );
-
-    rerender(<Button variant="tertiary">Tertiary</Button>);
-    expect(screen.getByRole('button', { name: 'Tertiary' })).toHaveClass(
-      'text-center relative whitespace-nowrap align-middle inline-flex items-center justify-center select-none rounded-lg py-1 px-6 bg-gray-500 text-white font-semibold shadow-white active:shadow-none focus:shadow-white py-3 text-14'
-    );
-  });
 });

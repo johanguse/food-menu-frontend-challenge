@@ -12,7 +12,7 @@ export const tagStyles = cva(
     'select-none',
     'rounded',
     'px-2',
-    'py-1',
+    'py-[6px]',
   ],
   {
     variants: {

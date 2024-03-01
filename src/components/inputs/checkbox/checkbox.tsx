@@ -8,6 +8,7 @@ interface CustomCheckboxProps {
   price: number;
   isChecked: boolean | undefined;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isAddition?: boolean;
 }
 
 export default function Checkbox({
@@ -16,6 +17,7 @@ export default function Checkbox({
   price,
   isChecked,
   onChange,
+  isAddition,
 }: CustomCheckboxProps) {
   return (
     <div className="flex flex-row items-center justify-between gap-2">
@@ -52,7 +54,7 @@ export default function Checkbox({
 
       {price && (
         <span className="text-14 font-semibold text-primary">
-          {formatNumberToCurrency(price)}
+          {isAddition ? '+' : ''} {formatNumberToCurrency(price)}
         </span>
       )}
     </div>
