@@ -41,9 +41,9 @@ const Radio: React.FC<RadioProps> = ({
         />
 
         {isChecked ? (
-          <RadioActive className="size-6" />
+          <RadioActive className="size-6" data-testid="radio-active-icon" />
         ) : (
-          <RadioInactive className="size-6" />
+          <RadioInactive className="size-6" data-testid="radio-inactive-icon" />
         )}
         {label && (
           <span
@@ -52,7 +52,9 @@ const Radio: React.FC<RadioProps> = ({
               `ml-2 flex flex-row items-center text-sm text-gray-500` +
               (isChecked ? ' font-bold' : ' font-normal')
             }>
-            {isDiscountPrice ? <Cifra className="-ml-2 mr-2 size-5" /> : null}
+            {isDiscountPrice ? (
+              <Cifra className="-ml-2 mr-2 size-5" data-testid="cifra-icon" />
+            ) : null}
             {label}
           </span>
         )}
