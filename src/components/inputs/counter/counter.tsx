@@ -25,7 +25,7 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
   label,
   price,
   discountPrice,
-  isAddition = true,
+  isAddition,
 }) => {
   const { currentTicket, updateSelection } = useTicketStore();
   const counter =

@@ -19,6 +19,7 @@ export const App = () => {
           description={section.description}
           required={section.required}
           type={sectionType}
+          isAddition={section.isAddition}
           options={section.options.map((option) => ({
             label: option.name,
             value: option.name,

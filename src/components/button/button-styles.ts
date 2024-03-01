@@ -11,7 +11,7 @@ export const solidButtonStyles = cva(
     'justify-center',
     'select-none',
     'rounded-lg',
-    'py-1',
+    'py-[6px]',
     'px-6',
   ],
   {
@@ -40,7 +40,7 @@ export const solidButtonStyles = cva(
           'shadow-white',
           'active:shadow-none',
           'focus:shadow-white',
-          'py-3',
+          'py-[10px]',
         ],
       },
       fontSize: {

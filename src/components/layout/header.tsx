@@ -54,7 +54,7 @@ export default function Header() {
             <Button
               variant="secondary"
               size="large"
-              leftIcon={<TicketIcon className="size-6" />}>
+              leftIcon={<TicketIcon className="size-[26px]" />}>
               ver ticket
             </Button>
           )}
@@ -62,7 +62,7 @@ export default function Header() {
           <Button
             variant="primary"
             size="large"
-            leftIcon={<UserIcon className="size-6" />}>
+            leftIcon={<UserIcon className="size-[27px]" />}>
             entrar
           </Button>
         </div>

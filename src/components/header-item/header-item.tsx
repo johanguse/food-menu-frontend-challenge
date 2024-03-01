@@ -29,10 +29,10 @@ export default function HeaderItem() {
           <div className="mx-12 flex flex-row items-stretch justify-between bg-white">
             <div className="flex flex-1 flex-col items-start justify-between pb-4">
               <div>
-                <h2 className="text-24 font-bold text-gray-700">
+                <h2 className="mb-1 text-24 font-bold text-gray-700">
                   {currentTicket?.name}
                 </h2>
-                <div className="mb-2 flex flex-row items-center gap-2">
+                <div className="mb-1 flex flex-row items-center gap-2">
                   <span className="text-16 font-semibold text-gray-500">
                     a partir de
                   </span>
@@ -46,7 +46,7 @@ export default function HeaderItem() {
               </div>
               <div className="flex w-96 flex-row items-start justify-between">
                 <div className="flex flex-col self-center">
-                  <span className="mb-1 text-16 font-semibold text-gray-700">
+                  <span className="text-16 font-semibold text-gray-700">
                     quantos?
                   </span>
                   {!(
@@ -54,7 +54,7 @@ export default function HeaderItem() {
                     Object.keys(currentTicket?.selections ?? {}).length === 0 ||
                     currentTicket?.total === 0
                   ) && (
-                    <p className="flex flex-row items-center gap-1 text-14">
+                    <p className="mt-1 flex flex-row items-center gap-1 text-14">
                       <span className="text-gray-500">total:</span>
                       <span className="font-bold">
                         {formatNumberToCurrency(total)}
