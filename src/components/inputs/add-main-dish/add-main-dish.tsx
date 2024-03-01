@@ -69,10 +69,13 @@ export default function AddMainDish() {
   };
 
   return (
-    <div>
+    <>
       {!currentTicket || !mainDishOptionName ? (
-        <Button buttonStyle={{ variant: 'primary' }} onClick={handleAddItem}>
-          Adicionar
+        <Button
+          buttonStyle={{ variant: 'tertiary', fontSize: 'small' }}
+          onClick={handleAddItem}
+          className="text-14 text-white">
+          adicionar
         </Button>
       ) : (
         <div className="flex flex-row items-center gap-5">
@@ -94,6 +97,6 @@ export default function AddMainDish() {
           />
         </div>
       )}
-    </div>
+    </>
   );
 }

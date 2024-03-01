@@ -44,7 +44,7 @@ export default function HeaderItem() {
                   {mockDataDish.item.description}
                 </p>
               </div>
-              <div className="flex w-80 flex-row items-start justify-between">
+              <div className="flex w-96 flex-row items-start justify-between">
                 <div className="flex flex-col">
                   <span className="mb-1 text-16 font-semibold text-gray-700">
                     quantos?
@@ -62,7 +62,9 @@ export default function HeaderItem() {
                     </p>
                   )}
                 </div>
-                <AddMainDish />
+                <div className="self-center">
+                  <AddMainDish />
+                </div>
               </div>
             </div>
             <div>
