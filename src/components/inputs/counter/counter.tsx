@@ -82,9 +82,7 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
     <div className="flex flex-row items-center justify-between gap-2">
       <div className="flex items-center gap-3">
         {(!label && counter === 1) || (!showTrashIcon && !label) ? (
-          <button
-            onClick={decreaseFunction}
-            className="flex cursor-pointer border-none bg-transparent p-0">
+          <button onClick={decreaseFunction} className="flex cursor-pointer">
             <img src={TrashIcon} alt="trash icon" className={iconSizeClass} />
           </button>
         ) : (

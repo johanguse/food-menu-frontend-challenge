@@ -66,10 +66,7 @@ export default function AddMainDish() {
       ) : (
         <div className="flex flex-row items-center gap-2">
           {counter === 1 ? (
-            <button
-              onClick={decreaseFunction}
-              className="flex cursor-pointer border-none bg-transparent p-0"
-            >
+            <button onClick={decreaseFunction} className="flex cursor-pointer">
               <img src={TrashIcon} alt="trash icon" className="size-6" />
             </button>
           ) : (
