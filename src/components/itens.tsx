@@ -1,4 +1,5 @@
 import { useTicketStore } from '@stores/ticket';
+import { formatNumberToCurrency } from 'src/lib/utils';
 
 const TicketItems = () => {
   const { currentTicket } = useTicketStore();
@@ -15,7 +16,7 @@ const TicketItems = () => {
           {Object.entries(options).map(([optionName, { quantity, price }]) => (
             <div key={optionName}>
               <p>
-                {optionName}: {quantity} x ${price.toFixed(2)}
+                {optionName}: {quantity} x {formatNumberToCurrency(price)}
               </p>
             </div>
           ))}
@@ -25,13 +26,16 @@ const TicketItems = () => {
   };
 
   return (
-    <div className="fixed top-40 bg-red-50">
+    <div className="fixed right-1 top-40 bg-red-50 p-4">
       <h2>Ticket Items</h2>
       {renderTicketItems()}
       /* show total the itens on ticket from all itens */
+      <pre>{JSON.stringify(currentTicket.selections, null, 2)}</pre>
+      <p>Name: {currentTicket.name}</p>
+      <p>Initial Price: {formatNumberToCurrency(currentTicket.initialPrice)}</p>
       <p>Quantity: {currentTicket.quantity}</p>
       <p>Observation: {currentTicket.observation}</p>
-      <p>Total: ${currentTicket.total.toFixed(2)}</p>
+      <p>Total: {formatNumberToCurrency(currentTicket.total)}</p>
     </div>
   );
 };

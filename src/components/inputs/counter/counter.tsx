@@ -13,6 +13,8 @@ interface CounterComponentProps {
   size: 'small' | 'large';
   label?: string;
   price: number;
+  discountPrice?: number;
+  isAddition?: boolean;
 }
 
 const CounterComponent: React.FC<CounterComponentProps> = ({
@@ -22,6 +24,8 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
   size = 'small',
   label,
   price,
+  discountPrice,
+  isAddition = true,
 }) => {
   const { currentTicket, updateSelection } = useTicketStore();
   const counter =
@@ -30,13 +34,24 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
     currentTicket?.selections[sectionName]?.[optionName]?.price || 0;
 
   const increaseFunction = () => {
-    updateSelection('COUNTER', sectionName, optionName, counter + 1, price);
+    updateSelection(
+      'COUNTER',
+      sectionName,
+      optionName,
+      counter + 1,
+      discountPrice ? discountPrice : price
+    );
   };
 
   const decreaseFunction = () => {
-    if (counter > 0) {
-      updateSelection('COUNTER', sectionName, optionName, counter - 1, price);
-    }
+    if (counter === 0) return;
+    updateSelection(
+      'COUNTER',
+      sectionName,
+      optionName,
+      counter - 1,
+      discountPrice ? discountPrice : price
+    );
   };
 
   const textSizeClass = size === 'small' ? 'text-md' : 'text-lg';
@@ -66,7 +81,7 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
   return (
     <div className="flex flex-row items-center justify-between gap-2">
       <div className="flex items-center gap-3">
-        {showTrashIcon || (counter === 1 && !label) ? (
+        {(!label && counter === 1) || (!showTrashIcon && !label) ? (
           <button
             onClick={decreaseFunction}
             className="flex cursor-pointer border-none bg-transparent p-0">
@@ -84,7 +99,9 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
       </div>
       {label && <span className="text-14">{label}</span>}
       {price !== undefined && label && (
-        <span className="text-primary">+ {getFormattedPrice()}</span>
+        <span className="text-primary">
+          {isAddition ? '+' : ''} {getFormattedPrice()}
+        </span>
       )}
     </div>
   );

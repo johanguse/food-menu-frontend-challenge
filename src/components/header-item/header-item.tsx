@@ -1,36 +1,14 @@
-import mockDataDish from '../../../__mock__/item.json';
-import mockDataRestaurant from '../../../__mock__/restaurant.json';
-import Button from '@components/button';
-import CounterComponent from '@components/inputs/counter';
+import AddMainDish from '@components/inputs/add-main-dish';
+import { data as mockDataDish } from '@mocks/itens';
+import { data as mockDataRestaurant } from '@mocks/restaurant';
 import { useTicketStore } from '@stores/ticket';
 import { formatNumberToCurrency } from 'src/lib/utils';
 
 export default function HeaderItem() {
-  const { addItem, currentItem, currentTicket, total } = useTicketStore(
-    (state) => ({
-      addItem: state.addItem,
-      currentItem: state.currentItem,
-      currentTicket: state.currentTicket,
-      total: state.currentTicket?.total || 0,
-    })
-  );
-
-  const handleAddItem = () => {
-    if (
-      currentItem &&
-      currentItem.sections.length > 0 &&
-      currentItem.sections[0].options.length > 0
-    ) {
-      const firstSection = currentItem.sections[0];
-      const firstOption = firstSection.options[0];
-      addItem(
-        firstSection.name,
-        firstOption.name,
-        firstOption.price || currentItem.initialPrice,
-        1
-      );
-    }
-  };
+  const { currentTicket, total } = useTicketStore((state) => ({
+    currentTicket: state.currentTicket,
+    total: state.currentTicket?.total || 0,
+  }));
 
   return (
     <div className="w-full bg-white pt-20">
@@ -52,14 +30,14 @@ export default function HeaderItem() {
             <div className="flex flex-1 flex-col items-start justify-between pb-4">
               <div>
                 <h2 className="text-24 font-bold text-gray-700">
-                  {mockDataDish.item.name}
+                  {currentTicket?.name}
                 </h2>
                 <div className="flex flex-row items-center gap-2">
                   <span className="text-16 font-bold text-gray-500">
                     a partir de
                   </span>
                   <span className="text-20 font-extrabold text-primary">
-                    {formatNumberToCurrency(mockDataDish.item.initialPrice)}
+                    {formatNumberToCurrency(currentTicket?.initialPrice)}
                   </span>
                 </div>
                 <p className="text-16 font-semibold text-gray-500">
@@ -84,23 +62,7 @@ export default function HeaderItem() {
                     </p>
                   )}
                 </div>
-                {!currentTicket ||
-                Object.keys(currentTicket?.selections ?? {}).length === 0 ||
-                currentTicket?.total === 0 ? (
-                  <Button
-                    buttonStyle={{ variant: 'primary' }}
-                    onClick={handleAddItem}>
-                    adicionar
-                  </Button>
-                ) : (
-                  <CounterComponent
-                    sectionName={currentItem?.sections[0].name}
-                    optionName={currentItem?.sections[0].name}
-                    price={mockDataDish.item.initialPrice}
-                    size="large"
-                    showTrashIcon
-                  />
-                )}
+                <AddMainDish />
               </div>
             </div>
             <div>

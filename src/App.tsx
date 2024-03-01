@@ -23,7 +23,7 @@ export const App = () => {
           options={section.options.map((option) => ({
             label: option.name,
             value: option.name,
-            price: option.price,
+            price: option.price ?? 0,
             discountPrice: option.discountPrice,
             onRadioChange: () =>
               updateSelection(
@@ -31,7 +31,7 @@ export const App = () => {
                 section.name,
                 option.name,
                 1,
-                option.price
+                option.price ?? 0
               ),
             onCheckboxChange: (checked: boolean) =>
               updateSelection(
@@ -39,7 +39,7 @@ export const App = () => {
                 section.name,
                 option.name,
                 checked ? 1 : 0,
-                option.price
+                option.price ?? 0
               ),
             onCounterChange: (count: number) =>
               updateSelection(
@@ -47,7 +47,7 @@ export const App = () => {
                 section.name,
                 option.name,
                 count,
-                option.price
+                option.price ?? 0
               ),
           }))}
         />

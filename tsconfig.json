@@ -24,6 +24,7 @@
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
+      "@mocks/*": ["./__mock__/*"],
       "@utils/*": ["src/utils/*"],
       "@stores/*": ["src/store/*"],
       "@types/*": ["src/types/*"]

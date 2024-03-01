@@ -1,4 +1,4 @@
-import mockData from '../../__mock__/item.json';
+import { data as mockData } from '@mocks/itens';
 import { calculateTotalPrice } from 'src/lib/utils';
 import { create } from 'zustand';
 
@@ -29,12 +29,15 @@ interface Option {
 }
 
 interface TicketSelection {
-  [key: string]: { price: number; quantity: number };
+  [sectionName: string]: {
+    [optionName: string]: { price: number; quantity: number };
+  };
 }
 
 interface Ticket {
   id: number;
   name: string;
+  initialPrice: number;
   total: number;
   quantity: number;
   selections: TicketSelection;
@@ -48,11 +51,16 @@ interface TicketStoreState {
   setCurrentTicket: (ticket: Ticket | null) => void;
   increaseTicketQuantity: () => void;
   decreaseTicketQuantity: () => void;
-  addItem: (
+  addMainItem: (
     sectionName: string,
     optionName: string,
     price: number,
     quantity: number
+  ) => void;
+  updateMainItemQuantity: (
+    sectionName: string,
+    optionName: string,
+    newQuantity: number
   ) => void;
   updateSelection: (
     type: 'COUNTER' | 'RADIO' | 'CHECKBOX',
@@ -81,8 +89,9 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
   currentTicket: {
     id: Date.now(),
     name: mockData.item.name,
+    initialPrice: mockData.item.initialPrice,
     total: mockData.item.initialPrice,
-    quantity: 1,
+    quantity: 0,
     selections: {},
     observation: '',
   },
@@ -104,15 +113,23 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
             }
           : state.currentTicket,
     })),
-  addItem: (sectionName, optionName, price) =>
+  addMainItem: (sectionName, optionName, price, quantity) =>
     set((state) => {
       const newSelections = { ...state.currentTicket?.selections };
-      const currentQuantity =
-        newSelections[sectionName]?.[optionName]?.quantity || 0;
-      newSelections[sectionName] = {
-        ...(newSelections[sectionName] || {}),
-        [optionName]: { price, quantity: currentQuantity + 1 },
-      };
+
+      // Check if a main dish is already selected and if it's different from the current selection
+      const existingMainDish = newSelections[sectionName];
+      if (existingMainDish && !existingMainDish[optionName]) {
+        // If a different main dish is selected, replace the existing one
+        newSelections[sectionName] = { [optionName]: { price, quantity } };
+      } else {
+        // If the same main dish is selected, or if no main dish is selected, add or update the quantity
+        const currentQuantity = existingMainDish?.[optionName]?.quantity || 0;
+        newSelections[sectionName] = {
+          ...(newSelections[sectionName] || {}),
+          [optionName]: { price, quantity: currentQuantity + quantity },
+        };
+      }
 
       const newTotal = calculateTotalPrice(newSelections);
 
@@ -122,9 +139,76 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
           ...state.currentTicket,
           selections: newSelections,
           total: newTotal,
+          // Update the total quantity of items in the ticket
+          quantity: Object.values(newSelections).reduce(
+            (acc, section) =>
+              acc +
+              Object.values(section).reduce(
+                (acc, item) => acc + item.quantity,
+                0
+              ),
+            0
+          ),
         },
       };
     }),
+
+  updateMainItemQuantity: (sectionName, optionName, newQuantity) =>
+    set((state) => {
+      if (!state.currentTicket || !state.currentItem) return {};
+
+      const selections = { ...state.currentTicket.selections };
+      const currentSection = state.currentItem.sections.find(
+        (section) => section.name === sectionName
+      );
+      const itemPrice =
+        currentSection?.options.find((option) => option.name === optionName)
+          ?.price || 0;
+
+      // If the section exists but the option is different, reset the section
+      if (selections[sectionName] && !selections[sectionName][optionName]) {
+        selections[sectionName] = {};
+      }
+
+      if (newQuantity > 0) {
+        // Update or set the new item quantity and price
+        selections[sectionName][optionName] = {
+          price: itemPrice,
+          quantity: newQuantity,
+        };
+      } else {
+        // Remove the item if the quantity is zero or less
+        delete selections[sectionName][optionName];
+        // If the section is empty after deletion, remove the section as well
+        if (Object.keys(selections[sectionName]).length === 0) {
+          delete selections[sectionName];
+        }
+      }
+
+      console.log(selections[sectionName]);
+
+      // Calculate the new total price
+      const newTotal = calculateTotalPrice(selections);
+
+      // Calculate the new total quantity
+      const newQuantityTotal = Object.values(selections).reduce(
+        (acc, section) =>
+          acc +
+          Object.values(section).reduce((acc, item) => acc + item.quantity, 0),
+        0
+      );
+
+      return {
+        ...state,
+        currentTicket: {
+          ...state.currentTicket,
+          selections,
+          total: newTotal,
+          quantity: newQuantityTotal,
+        },
+      };
+    }),
+
   updateSelection: (type, sectionName, optionName, value, price) =>
     set((state) => {
       if (!state.currentTicket) return {};
@@ -155,10 +239,30 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
           console.log(selections);
           break;
         case 'COUNTER':
-          if (!selections[sectionName]) selections[sectionName] = {};
-          selections[sectionName][optionName] = { price, quantity: value };
-          console.log(selections);
+          if (value > 0) {
+            // If the counter value is greater than 0, update or create the option
+            selections[sectionName] = {
+              ...selections[sectionName],
+              [optionName]: { price, quantity: value },
+            };
+          } else {
+            // If the counter value is 0 or less, delete the option if it exists
+            if (
+              selections[sectionName] &&
+              selections[sectionName][optionName]
+            ) {
+              delete selections[sectionName][optionName];
+
+              // If the section becomes empty after deletion, delete the section as well
+              if (Object.keys(selections[sectionName]).length === 0) {
+                delete selections[sectionName];
+              }
+            }
+          }
+
+          console.log(selections[sectionName]);
           break;
+
         default:
           console.warn(`Unsupported type: ${type}`);
       }

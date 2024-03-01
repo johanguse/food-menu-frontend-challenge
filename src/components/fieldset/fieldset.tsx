@@ -8,6 +8,7 @@ interface Option {
   label: string;
   value: string;
   price: number;
+  isAddition?: boolean;
   discountPrice?: number;
   isChecked?: boolean;
   count?: number;
@@ -30,7 +31,13 @@ export default function FieldsetComponent({
 }: FieldsetComponentProps) {
   const { currentTicket, updateSelection } = useTicketStore();
 
-  const handleOptionChange = (type, sectionName, optionName, value, price) => {
+  const handleOptionChange = (
+    type: FieldsetComponentProps['type'],
+    sectionName: string,
+    optionName: string,
+    value: number,
+    price: number
+  ) => {
     updateSelection(type, sectionName, optionName, value, price);
   };
 
@@ -44,7 +51,6 @@ export default function FieldsetComponent({
         return options.map((option) => {
           const isChecked =
             currentTicket?.selections[legend]?.[option.value]?.quantity > 0;
-          const isDiscountPrice = option.discountPrice ? true : false;
           return (
             <Radio
               key={option.value}
@@ -58,11 +64,11 @@ export default function FieldsetComponent({
                   legend,
                   option.value,
                   1,
-                  option.price
+                  option.discountPrice || option.price
                 )
               }
               price={option.price}
-              isdiscountPrice={isDiscountPrice}
+              discountPrice={option.discountPrice}
             />
           );
         });
@@ -110,10 +116,12 @@ export default function FieldsetComponent({
                 option.price
               )
             }
-            showTrashIcon={option.count === 1}
+            showTrashIcon={false}
             size="small"
             label={option.label}
             price={option.price}
+            discountPrice={option.discountPrice}
+            isAddition={option.isAddition}
           />
         ));
       default:

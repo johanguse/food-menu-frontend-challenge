@@ -12,7 +12,7 @@ interface RadioProps {
   isChecked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  isdiscountPrice?: boolean;
+  discountPrice?: number;
 }
 
 const Radio: React.FC<RadioProps> = ({
@@ -22,8 +22,9 @@ const Radio: React.FC<RadioProps> = ({
   isChecked,
   onChange,
   value,
-  isdiscountPrice,
+  discountPrice,
 }) => {
+  const isDiscountPrice = discountPrice ? true : false;
   return (
     <div className="flex flex-row items-center justify-between gap-2">
       <label
@@ -51,16 +52,23 @@ const Radio: React.FC<RadioProps> = ({
               `ml-2 flex flex-row items-center text-sm text-gray-700` +
               (isChecked ? ' font-bold' : ' font-normal')
             }>
-            {isdiscountPrice ? <Cifra className="-ml-2 mr-2 size-5" /> : null}
+            {isDiscountPrice ? <Cifra className="-ml-2 mr-2 size-5" /> : null}
             {label}
           </span>
         )}
       </label>
 
-      {price > 0 && (
+      {price >= 0 && !isDiscountPrice ? (
         <span className="text-14 text-primary">
-          {formatNumberToCurrency(price)}
+          {formatNumberToCurrency(isDiscountPrice ? discountPrice : price)}
         </span>
+      ) : (
+        <div className="text-12">
+          <span>de {formatNumberToCurrency(price)} por </span>
+          <span className="text-14 text-green-500">
+            {formatNumberToCurrency(discountPrice)}
+          </span>
+        </div>
       )}
     </div>
   );
