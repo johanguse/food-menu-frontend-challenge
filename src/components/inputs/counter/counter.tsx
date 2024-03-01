@@ -55,7 +55,7 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
   };
 
   const textSizeClass = size === 'small' ? 'text-md' : 'text-lg';
-  const iconSizeClass = size === 'small' ? 'w-6 h-6' : 'w-8 h-8';
+  const iconSizeClass = size === 'small' ? 'size-6' : 'size-8';
 
   const getFormattedPrice = () => {
     let calculatedPrice;
