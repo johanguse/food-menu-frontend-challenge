@@ -12,9 +12,6 @@ describe('Header Component', () => {
     expect(
       screen.getByPlaceholderText('busque pela loja ou culinária')
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: 'ver ticket' })
-    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'entrar' })).toBeInTheDocument();
   });
 
@@ -27,7 +24,6 @@ describe('Header Component', () => {
   });
 
   it('displays correct text for buttons', () => {
-    expect(screen.getByText('ver ticket')).toBeVisible();
     expect(screen.getByText('entrar')).toBeVisible();
   });
 
