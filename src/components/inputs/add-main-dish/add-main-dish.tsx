@@ -8,12 +8,16 @@ export default function AddMainDish() {
   const { updateMainItemQuantity, addMainItem, currentItem, currentTicket } =
     useTicketStore();
 
-  const mainDishSectionName = Object.keys(currentTicket.selections)[0] || '';
-  const mainDishOptionName =
-    Object.keys(currentTicket.selections[mainDishSectionName] || {})[0] || '';
-  const counter =
-    currentTicket.selections[mainDishSectionName]?.[mainDishOptionName]
-      ?.quantity || 0;
+  const mainDishSectionName = currentTicket
+    ? Object.keys(currentTicket.selections)[0] || ''
+    : '';
+  const mainDishOptionName = currentTicket
+    ? Object.keys(currentTicket.selections[mainDishSectionName] || {})[0] || ''
+    : '';
+  const counter = currentTicket
+    ? currentTicket.selections[mainDishSectionName]?.[mainDishOptionName]
+        ?.quantity || 0
+    : 0;
 
   const handleAddItem = () => {
     if (currentItem && currentItem.sections.length > 0) {
@@ -29,15 +33,17 @@ export default function AddMainDish() {
   };
 
   const increaseFunction = () => {
-    updateMainItemQuantity(
-      mainDishSectionName,
-      mainDishOptionName,
-      counter + 1
-    );
+    if (currentTicket) {
+      updateMainItemQuantity(
+        mainDishSectionName,
+        mainDishOptionName,
+        counter + 1
+      );
+    }
   };
 
   const decreaseFunction = () => {
-    if (counter > 0) {
+    if (counter > 0 && currentTicket) {
       updateMainItemQuantity(
         mainDishSectionName,
         mainDishOptionName,

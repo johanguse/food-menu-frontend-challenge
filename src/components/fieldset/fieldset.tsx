@@ -41,23 +41,24 @@ export default function FieldsetComponent({
     updateSelection(type, sectionName, optionName, value, price);
   };
 
-  const handleCounterChange = (value: string, count: number, price: number) => {
-    updateSelection('COUNTER', legend, value, count, price);
-  };
-
   const renderOptions = () => {
     switch (type) {
       case 'RADIO':
         return options.map((option) => {
           const isChecked =
-            currentTicket?.selections[legend]?.[option.value]?.quantity > 0;
+            currentTicket &&
+            currentTicket.selections &&
+            currentTicket.selections[legend] &&
+            currentTicket.selections[legend][option.value] &&
+            currentTicket.selections[legend][option.value].quantity > 0;
+
           return (
             <Radio
               key={option.value}
               name={`${legend}Group`}
               label={option.label}
               value={option.value}
-              isChecked={isChecked}
+              isChecked={isChecked || false}
               onChange={() =>
                 handleOptionChange(
                   'RADIO',
@@ -75,13 +76,18 @@ export default function FieldsetComponent({
       case 'CHECKBOX':
         return options.map((option) => {
           const isChecked =
-            currentTicket?.selections[legend]?.[option.value]?.quantity > 0;
+            currentTicket &&
+            currentTicket.selections &&
+            currentTicket.selections[legend] &&
+            currentTicket.selections[legend][option.value] &&
+            currentTicket.selections[legend][option.value].quantity > 0;
+
           return (
             <Checkbox
               key={option.value}
               label={option.label}
               value={option.value}
-              isChecked={isChecked}
+              isChecked={isChecked || false}
               onChange={(e) =>
                 handleOptionChange(
                   'CHECKBOX',
@@ -101,21 +107,6 @@ export default function FieldsetComponent({
             key={option.value}
             sectionName={legend}
             optionName={option.value}
-            counter={option.count || 0}
-            increaseFunction={() =>
-              handleCounterChange(
-                option.value,
-                (option.count || 0) + 1,
-                option.price
-              )
-            }
-            decreaseFunction={() =>
-              handleCounterChange(
-                option.value,
-                (option.count || 0) - 1,
-                option.price
-              )
-            }
             showTrashIcon={false}
             size="small"
             label={option.label}

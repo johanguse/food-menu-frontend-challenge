@@ -115,20 +115,30 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
     })),
   addMainItem: (sectionName, optionName, price, quantity) =>
     set((state) => {
-      const newSelections = { ...state.currentTicket?.selections };
-
-      const existingMainDish = newSelections[sectionName];
-      if (existingMainDish && !existingMainDish[optionName]) {
-        newSelections[sectionName] = { [optionName]: { price, quantity } };
-      } else {
-        const currentQuantity = existingMainDish?.[optionName]?.quantity || 0;
-        newSelections[sectionName] = {
-          ...(newSelections[sectionName] || {}),
-          [optionName]: { price, quantity: currentQuantity + quantity },
-        };
+      if (!state.currentTicket) {
+        return {};
       }
 
+      const newSelections = { ...state.currentTicket.selections };
+
+      const existingSection = newSelections[sectionName] || {};
+      const existingItem = existingSection[optionName] || {
+        price: 0,
+        quantity: 0,
+      };
+      existingSection[optionName] = {
+        price,
+        quantity: existingItem.quantity + quantity,
+      };
+      newSelections[sectionName] = existingSection;
+
       const newTotal = calculateTotalPrice(newSelections);
+      const newQuantity = Object.values(newSelections).reduce(
+        (acc, section) =>
+          acc +
+          Object.values(section).reduce((acc, item) => acc + item.quantity, 0),
+        0
+      );
 
       return {
         ...state,
@@ -136,15 +146,7 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
           ...state.currentTicket,
           selections: newSelections,
           total: newTotal,
-          quantity: Object.values(newSelections).reduce(
-            (acc, section) =>
-              acc +
-              Object.values(section).reduce(
-                (acc, item) => acc + item.quantity,
-                0
-              ),
-            0
-          ),
+          quantity: newQuantity,
         },
       };
     }),
