@@ -41,7 +41,7 @@ interface Ticket {
   total: number;
   quantity: number;
   selections: TicketSelection;
-  observation?: string;
+  observationText?: string;
 }
 
 interface TicketStoreState {
@@ -69,9 +69,7 @@ interface TicketStoreState {
     value: number,
     price: number
   ) => void;
-  handleObservation: (observation: string) => void;
-  setObservation: (observation: string) => void;
-  observation: string;
+  setObservation: (observationText: string) => void;
 }
 
 export const useTicketStore = create<TicketStoreState>((set) => ({
@@ -93,7 +91,7 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
     total: mockData.item.initialPrice,
     quantity: 0,
     selections: {},
-    observation: '',
+    observationText: '',
   },
   setCurrentItem: (item) => set(() => ({ currentItem: item })),
   setCurrentTicket: (ticket) => set(() => ({ currentTicket: ticket })),
@@ -246,14 +244,11 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
       };
     }),
 
-  observation: '',
-
-  setObservation: (observation: string) => set({ observation }),
-
-  handleObservation: (observation) =>
+  setObservation: (observationText: string) => {
     set((state) => ({
       currentTicket: state.currentTicket
-        ? { ...state.currentTicket, observation }
+        ? { ...state.currentTicket, observationText }
         : null,
-    })),
+    }));
+  },
 }));
