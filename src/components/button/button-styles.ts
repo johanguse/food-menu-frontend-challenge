@@ -11,8 +11,6 @@ export const solidButtonStyles = cva(
     'justify-center',
     'select-none',
     'rounded-lg',
-    'py-[6px]',
-    'px-6',
   ],
   {
     variants: {
@@ -24,6 +22,8 @@ export const solidButtonStyles = cva(
           'shadow-teal',
           'active:shadow-none',
           'focus:shadow-teal',
+          'py-[6px]',
+          'px-6',
         ],
         secondary: [
           'bg-purple-100',
@@ -32,6 +32,8 @@ export const solidButtonStyles = cva(
           'shadow-purple',
           'active:shadow-none',
           'focus:shadow-purple',
+          'py-[6px]',
+          'px-6',
         ],
         tertiary: [
           'bg-gray-500',
@@ -40,6 +42,7 @@ export const solidButtonStyles = cva(
           'shadow-white',
           'active:shadow-none',
           'focus:shadow-white',
+          'px-6',
           'py-[10px]',
         ],
       },

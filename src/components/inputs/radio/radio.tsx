@@ -29,8 +29,7 @@ export default function Radio({
     <div className="flex flex-row items-center justify-between gap-2">
       <label
         htmlFor={value}
-        className="inline-flex cursor-pointer items-center focus-within:ring-2"
-      >
+        className="inline-flex cursor-pointer items-center focus-within:ring-2">
         <input
           type="radio"
           className="sr-only"
@@ -52,8 +51,7 @@ export default function Radio({
             className={
               `ml-2 flex flex-row items-center text-sm text-gray-500` +
               (isChecked ? ' font-bold' : ' font-normal')
-            }
-          >
+            }>
             {isDiscountPrice ? (
               <Cifra
                 className="-ml-2 mr-2 size-[22px]"
