@@ -5,7 +5,7 @@ import PlusButtonComponent from '@components/inputs/plus-button';
 import { useTicketStore } from '@stores/ticket';
 
 export default function AddMainDish() {
-  const { updateMainItemQuantity, currentTicket, currentItem } =
+  const { addMainItem, updateMainItemQuantity, currentTicket, currentItem } =
     useTicketStore();
 
   // Assuming "qual o tamanho?" is a key section for main dish size
@@ -28,13 +28,11 @@ export default function AddMainDish() {
   }
 
   const handleAddItem = () => {
-    if (mainDishOptionName) {
-      updateMainItemQuantity(
-        mainDishSectionName,
-        mainDishOptionName,
-        counter + 1
-      );
-    }
+    // Assuming the first section and first option are the main dish
+    // This should handle in a better way
+    const firstSection = currentItem?.sections[0];
+    const firstOption = firstSection?.options[0];
+    addMainItem(firstSection.name, firstOption.name, firstOption.price || 0, 1);
   };
 
   const increaseFunction = () => {
@@ -67,7 +65,7 @@ export default function AddMainDish() {
         <div className="flex flex-row items-center gap-2">
           {counter === 1 ? (
             <button onClick={decreaseFunction} className="flex cursor-pointer">
-              <img src={TrashIcon} alt="trash icon" className="size-6" />
+              <img src={TrashIcon} alt="trash icon" className="size-9" />
             </button>
           ) : (
             <MinusButtonComponent

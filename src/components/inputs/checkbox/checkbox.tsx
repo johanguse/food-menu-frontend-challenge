@@ -39,7 +39,7 @@ export default function Checkbox({
         {label && (
           <span
             className={
-              `ml-2 text-sm text-gray-700` +
+              `ml-2 text-sm text-gray-500` +
               (isChecked ? ' font-bold' : ' font-normal')
             }>
             {label}

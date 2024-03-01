@@ -5,7 +5,7 @@ const TicketItems = () => {
   const { currentTicket } = useTicketStore();
 
   if (!currentTicket || Object.keys(currentTicket.selections).length === 0) {
-    return <p>No items in the ticket.</p>;
+    return null;
   }
 
   const renderTicketItems = () => {

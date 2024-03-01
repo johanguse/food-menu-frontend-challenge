@@ -17,7 +17,7 @@ const MinusButtonComponent: React.FC<MinusButtonComponentProps> = ({
   const iconSrc = disabled ? minusDisabled : minusActive;
   const altText = 'minus icon';
 
-  const sizeClasses = size === 'small' ? 'size-6' : 'size-12';
+  const sizeClasses = size === 'small' ? 'size-6' : 'size-9';
 
   return (
     <button

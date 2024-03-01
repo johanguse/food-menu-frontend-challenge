@@ -49,7 +49,7 @@ const Radio: React.FC<RadioProps> = ({
           <span
             id={`${name}-label`}
             className={
-              `ml-2 flex flex-row items-center text-sm text-gray-700` +
+              `ml-2 flex flex-row items-center text-sm text-gray-500` +
               (isChecked ? ' font-bold' : ' font-normal')
             }>
             {isDiscountPrice ? <Cifra className="-ml-2 mr-2 size-5" /> : null}
