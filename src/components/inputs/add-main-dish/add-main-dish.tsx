@@ -1,6 +1,7 @@
-import MinusButtonComponent from '../minus-button';
-import PlusButtonComponent from '../plus-button';
+import TrashIcon from '@assets/icons/trash.svg';
 import Button from '@components/button';
+import MinusButtonComponent from '@components/inputs/minus-button';
+import PlusButtonComponent from '@components/inputs/plus-button';
 import { useTicketStore } from '@stores/ticket';
 
 export default function AddMainDish() {
@@ -64,10 +65,20 @@ export default function AddMainDish() {
         </Button>
       ) : (
         <div className="flex flex-row items-center gap-2">
-          <MinusButtonComponent
-            decreaseFunction={decreaseFunction}
-            size="large"
-          />
+          {counter === 1 ? (
+            <button
+              onClick={decreaseFunction}
+              className="flex cursor-pointer border-none bg-transparent p-0"
+            >
+              <img src={TrashIcon} alt="trash icon" className="size-6" />
+            </button>
+          ) : (
+            <MinusButtonComponent
+              disabled={counter === 0}
+              decreaseFunction={decreaseFunction}
+              size="large"
+            />
+          )}
           <span className="text-lg font-bold">{counter}</span>
           <PlusButtonComponent
             increaseFunction={increaseFunction}
