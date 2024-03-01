@@ -75,7 +75,7 @@ export default function AddMainDish() {
           Adicionar
         </Button>
       ) : (
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row items-center gap-5">
           {counter === 1 ? (
             <button onClick={decreaseFunction} className="flex cursor-pointer">
               <img src={TrashIcon} alt="trash icon" className="size-9" />
@@ -87,7 +87,7 @@ export default function AddMainDish() {
               size="large"
             />
           )}
-          <span className="text-lg font-bold">{counter}</span>
+          <span className="text-16 font-bold">{counter}</span>
           <PlusButtonComponent
             increaseFunction={increaseFunction}
             size="large"

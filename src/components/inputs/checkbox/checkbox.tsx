@@ -48,7 +48,9 @@ export default function Checkbox({
       </label>
 
       {price && (
-        <span className="text-primary">{formatNumberToCurrency(price)}</span>
+        <span className="text-14 font-bold text-primary">
+          {formatNumberToCurrency(price)}
+        </span>
       )}
     </div>
   );

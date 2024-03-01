@@ -13,7 +13,7 @@ export default function HeaderItem() {
   return (
     <div className="mx-4 bg-white pt-20">
       <div className="container mx-auto">
-        <div className="item-header py-6">
+        <div className="item-header py-7">
           <div className="mb-6 flex flex-row items-center gap-2 px-0">
             <img
               src={mockDataRestaurant.company.logo}
