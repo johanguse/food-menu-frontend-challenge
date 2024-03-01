@@ -71,7 +71,7 @@ export default function AddMainDish() {
   return (
     <>
       {!currentTicket || !mainDishOptionName ? (
-        <Button variant="tertiary" size="small" onClick={handleAddItem}>
+        <Button variant="tertiary" size="medium" onClick={handleAddItem}>
           adicionar
         </Button>
       ) : (

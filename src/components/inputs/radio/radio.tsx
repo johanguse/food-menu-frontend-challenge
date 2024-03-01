@@ -64,11 +64,11 @@ const Radio: React.FC<RadioProps> = ({
       </label>
 
       {price >= 0 && !isDiscountPrice ? (
-        <span className="text-14 font-bold text-primary">
+        <span className="text-14 font-semibold text-primary">
           {formatNumberToCurrency(isDiscountPrice ? discountPrice : price)}
         </span>
       ) : (
-        <div className="text-12 font-bold">
+        <div className="text-12 font-semibold">
           <span className="mr-1 text-gray-500">
             de {formatNumberToCurrency(price)} por{' '}
           </span>

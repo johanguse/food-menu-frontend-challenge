@@ -19,10 +19,10 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <img src={LocationIcon} alt="Location" className="size-6" />
             <div>
-              <div className="text-14 font-bold text-purple-50">
+              <div className="text-14 font-semibold text-purple-50">
                 entregando em
               </div>
-              <button className="flex items-center gap-1 text-18 font-bold text-white">
+              <button className="flex items-center gap-1 text-18 font-semibold text-white">
                 {address}
                 <img src={ArrowRight} alt="Arrow Right" className="size-4" />
               </button>

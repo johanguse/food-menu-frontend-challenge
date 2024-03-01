@@ -11,7 +11,7 @@ export const solidButtonStyles = cva(
     'justify-center',
     'select-none',
     'rounded-lg',
-    'py-2',
+    'py-1',
     'px-6',
   ],
   {
@@ -40,6 +40,7 @@ export const solidButtonStyles = cva(
           'shadow-white',
           'active:shadow-none',
           'focus:shadow-white',
+          'py-3',
         ],
       },
       fontSize: {
@@ -50,7 +51,7 @@ export const solidButtonStyles = cva(
     },
     defaultVariants: {
       variant: 'primary',
-      fontSize: 'medium',
+      fontSize: 'large',
     },
   }
 );
