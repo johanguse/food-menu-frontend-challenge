@@ -13,14 +13,19 @@ export const formatNumberToCurrency = (
   return currencyFormatter.format(number);
 };
 
+interface TicketItem {
+  price: number;
+  quantity?: number;
+}
+
 interface TicketSelection {
-  [key: string]: { price: number; quantity: number };
+  [key: string]: { [key: string]: TicketItem };
 }
 
 export const calculateTotalPrice = (selections: TicketSelection) => {
   let total = 0;
   Object.values(selections).forEach((section) => {
-    Object.values(section).forEach((item) => {
+    Object.values(section).forEach((item: TicketItem) => {
       total += item.price * (item.quantity ?? 1);
     });
   });
