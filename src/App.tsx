@@ -1,7 +1,6 @@
 import FieldsetComponent from '@components/fieldset';
 import HeaderItem from '@components/header-item';
 import Textarea from '@components/inputs/textarea';
-import TicketItems from '@components/itens';
 import Footer from '@components/layout/footer';
 import Header from '@components/layout/header';
 import { useTicketStore } from '@stores/ticket';
@@ -62,7 +61,6 @@ export const App = () => {
       {currentItem && renderSections()}
       <Textarea />
       <Footer />
-      <TicketItems />
     </>
   );
 };
