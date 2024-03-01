@@ -40,14 +40,12 @@ describe('Button Component', () => {
   });
 
   it('applies button variant styles correctly', () => {
-    const { rerender } = render(
-      <Button buttonVariant="primary">Primary</Button>
-    );
+    const { rerender } = render(<Button variant="primary">Primary</Button>);
     expect(screen.getByRole('button', { name: 'Primary' })).toHaveClass(
       'text-center relative whitespace-nowrap align-middle inline-flex items-center justify-center select-none rounded-lg py-2 px-6'
     );
 
-    rerender(<Button buttonVariant="secondary">Secondary</Button>);
+    rerender(<Button variant="secondary">Secondary</Button>);
     expect(screen.getByRole('button', { name: 'Secondary' })).toHaveClass(
       'text-center relative whitespace-nowrap align-middle inline-flex items-center justify-center select-none rounded-lg py-2 px-6'
     );

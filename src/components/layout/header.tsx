@@ -52,17 +52,17 @@ export default function Header() {
             currentTicket?.total === 0
           ) && (
             <Button
-              buttonStyle={{ variant: 'secondary', fontSize: 'large' }}
-              leftIcon={<TicketIcon className="size-6" />}
-              className="text-primary">
+              variant="secondary"
+              size="large"
+              leftIcon={<TicketIcon className="size-6" />}>
               ver ticket
             </Button>
           )}
 
           <Button
-            buttonStyle={{ variant: 'primary', fontSize: 'large' }}
-            leftIcon={<UserIcon className="size-6" />}
-            className="text-white">
+            variant="primary"
+            size="large"
+            leftIcon={<UserIcon className="size-6" />}>
             entrar
           </Button>
         </div>

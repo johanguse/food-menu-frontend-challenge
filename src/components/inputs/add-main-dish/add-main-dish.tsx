@@ -71,10 +71,7 @@ export default function AddMainDish() {
   return (
     <>
       {!currentTicket || !mainDishOptionName ? (
-        <Button
-          buttonStyle={{ variant: 'tertiary', fontSize: 'small' }}
-          onClick={handleAddItem}
-          className="text-14 text-white">
+        <Button variant="tertiary" size="small" onClick={handleAddItem}>
           adicionar
         </Button>
       ) : (
