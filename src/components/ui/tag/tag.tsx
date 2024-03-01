@@ -5,10 +5,12 @@ export type TagProps = {
   tagVariant?: 'primary';
 };
 
-export default function Tag({ text }: TagProps) {
+export default function Tag({ text, tagVariant = 'primary' }: TagProps) {
   if (!text) {
     return null;
   }
 
-  return <div className={tagStyles()}>{text}</div>;
+  const className = tagStyles({ variant: tagVariant });
+
+  return <div className={className}>{text}</div>;
 }

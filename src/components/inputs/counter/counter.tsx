@@ -94,11 +94,13 @@ const CounterComponent: React.FC<CounterComponentProps> = ({
         )}
         <span className={`${textSizeClass} font-bold`}>{counter}</span>
         <PlusButtonComponent increaseFunction={increaseFunction} size={size} />
-        {label && <span className="text-14 text-gray-500">{label}</span>}
       </div>
+      {label && (
+        <span className="ml-1 mr-auto text-14 text-gray-500">{label}</span>
+      )}
 
       {price !== undefined && label && (
-        <span className="text-14 font-bold text-primary">
+        <span className="text-14 font-semibold text-primary">
           {isAddition ? '+' : ''} {getFormattedPrice()}
         </span>
       )}

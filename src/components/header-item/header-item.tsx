@@ -33,7 +33,7 @@ export default function HeaderItem() {
                   {currentTicket?.name}
                 </h2>
                 <div className="mb-2 flex flex-row items-center gap-2">
-                  <span className="text-16 font-bold text-gray-500">
+                  <span className="text-16 font-semibold text-gray-500">
                     a partir de
                   </span>
                   <span className="text-20 font-extrabold text-primary">
@@ -45,7 +45,7 @@ export default function HeaderItem() {
                 </p>
               </div>
               <div className="flex w-96 flex-row items-start justify-between">
-                <div className="flex flex-col">
+                <div className="flex flex-col self-center">
                   <span className="mb-1 text-16 font-semibold text-gray-700">
                     quantos?
                   </span>

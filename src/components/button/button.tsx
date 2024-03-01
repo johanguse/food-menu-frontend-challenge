@@ -2,7 +2,6 @@ import { forwardRef, useMemo } from 'react';
 
 import { solidButtonStyles } from './button-styles';
 import LoaderSpinner from '@assets/icons/loader_spinner.svg?react';
-import { type VariantProps } from 'tailwind-variants';
 
 type BaseButtonAttributes = React.ComponentPropsWithoutRef<'button'>;
 
@@ -13,17 +12,17 @@ interface ButtonProps extends BaseButtonAttributes {
   disabled?: boolean;
   leftIcon?: React.ReactElement;
   rightIcon?: React.ReactElement;
-  buttonStyle?: VariantProps<typeof solidButtonStyles>;
   className?: string;
-  buttonVariant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'tertiary';
+  size?: 'small' | 'medium' | 'large';
 }
 
 const Button = forwardRef<Ref, ButtonProps>((props, ref) => {
   const {
     type,
     children,
-    buttonStyle,
-    buttonVariant,
+    variant = 'primary',
+    size = 'medium',
     disabled,
     isLoading,
     leftIcon,
@@ -31,6 +30,11 @@ const Button = forwardRef<Ref, ButtonProps>((props, ref) => {
     className,
     ...rest
   } = props;
+
+  const computedClassName = useMemo(() => {
+    const variantClasses = solidButtonStyles({ variant, fontSize: size });
+    return `${variantClasses} ${className || ''}`.trim();
+  }, [variant, size, className]);
 
   const { newIcon: icon, iconPlacement } = useMemo(() => {
     let newIcon = rightIcon || leftIcon;
@@ -43,46 +47,39 @@ const Button = forwardRef<Ref, ButtonProps>((props, ref) => {
 
     return {
       newIcon,
-      iconPlacement: rightIcon ? ('right' as const) : ('left' as const),
+      iconPlacement: rightIcon ? 'right' : 'left',
     };
   }, [isLoading, leftIcon, rightIcon]);
 
-  const renderButtonVariant = () => {
-    if (buttonVariant === 'primary') {
-      return solidButtonStyles({ ...buttonStyle, className });
-    }
-    return solidButtonStyles({ ...buttonStyle, className });
-  };
-
   return (
     <button
-      className={renderButtonVariant()}
+      className={computedClassName}
       {...rest}
-      type={type ? 'submit' : 'button'}
+      type={type || 'button'}
       ref={ref}
       disabled={disabled || isLoading}>
-      {icon && iconPlacement === 'left' ? (
+      {icon && iconPlacement === 'left' && (
         <span
           className={`inline-flex shrink-0 self-center ${children && !isLoading && '-ml-1 mr-2'}`}>
           {icon}
         </span>
-      ) : null}
+      )}
 
       {!isLoading && children}
 
-      {icon && iconPlacement === 'right' ? (
+      {icon && iconPlacement === 'right' && (
         <span
           className={`inline-flex shrink-0 self-center ${children && !isLoading && '-mr-1 ml-2'}`}>
           {icon}
         </span>
-      ) : null}
+      )}
     </button>
   );
 });
 
 Button.defaultProps = {
-  buttonStyle: {},
-  buttonVariant: 'primary',
+  variant: 'primary',
+  size: 'medium',
   isLoading: false,
   disabled: false,
   leftIcon: undefined,
