@@ -113,19 +113,21 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
     })),
   addMainItem: (sectionName, optionName, price, quantity) =>
     set((state) => {
-      if (!state.currentTicket) {
+      if (!state.currentTicket || !state.currentItem) {
         return {};
       }
 
       const newSelections = { ...state.currentTicket.selections };
+      const itemPrice = state.currentItem.initialPrice ?? price;
 
       const existingSection = newSelections[sectionName] || {};
       const existingItem = existingSection[optionName] || {
-        price: 0,
+        price: itemPrice,
         quantity: 0,
       };
+
       existingSection[optionName] = {
-        price,
+        price: itemPrice,
         quantity: existingItem.quantity + quantity,
       };
       newSelections[sectionName] = existingSection;
@@ -188,7 +190,6 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
           selections[sectionName] = {
             [optionName]: { price, quantity: value },
           };
-          console.log(selections);
           break;
         case 'CHECKBOX':
           if (value) {
@@ -204,7 +205,6 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
               }
             }
           }
-          console.log(selections);
           break;
         case 'COUNTER':
           if (value > 0) {
@@ -225,7 +225,6 @@ export const useTicketStore = create<TicketStoreState>((set) => ({
             }
           }
 
-          console.log(selections[sectionName]);
           break;
 
         default:
